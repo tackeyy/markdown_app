@@ -1,0 +1,22 @@
+import { ReduceStore } from 'fulux/utils';
+import dispatcher from '../dispatcher;'
+
+class DashboardStore extends ReduceStore {
+  getInitialState() {
+    return {
+      notes: [],
+      selectedNoteId: null;
+    };
+  }
+
+  reduce(state, action) {
+    switch (action.type) {
+      case 'note/create':
+        return Object.assign({}, state, {
+          notes: [action.note, ...state.notes],
+          selectedNoteId: action.note.id
+        });
+      default:
+        return state;
+    }
+}
